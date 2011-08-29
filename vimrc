@@ -20,6 +20,7 @@ set tabstop=2 "set tab character to 4 characters
 set shiftwidth=2 "indent width for autoindent
 set expandtab "turn tabs into whitespace
 set smartindent
+set bg=dark
 filetype indent on "indent depends on filetype
 
 " JJM Enable line numbers, useful for discussion when on a projector
