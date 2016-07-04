@@ -6,10 +6,13 @@
 "             as part of the devscripts package.
 "============================================================================
 
-if exists("g:loaded_syntastic_sh_checkbashisms_checker")
+if exists('g:loaded_syntastic_sh_checkbashisms_checker')
     finish
 endif
-let g:loaded_syntastic_sh_checkbashisms_checker=1
+let g:loaded_syntastic_sh_checkbashisms_checker = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 function! SyntaxCheckers_sh_checkbashisms_GetLocList() dict
     let makeprg = self.makeprgBuild({ 'args': '-fx' })
@@ -29,7 +32,11 @@ function! SyntaxCheckers_sh_checkbashisms_GetLocList() dict
         \ 'subtype': 'Style' })
 endfunction
 
-
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'sh',
     \ 'name': 'checkbashisms' })
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+" vim: set sw=4 sts=4 et fdm=marker:

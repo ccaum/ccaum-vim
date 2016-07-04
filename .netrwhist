@@ -1,6 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/ccaum/projects/runner/puppet/modules/ruby/manifests'
-let g:netrw_dirhist_2='/Users/ccaum/projects/console_auth/src/db'
-let g:netrw_dirhist_3='/Users/ccaum/projects/polaroid-dev-env/src/polaroid/lib/puppet/face/polaroid'
-let g:netrw_dirhist_4='/Users/ccaum/projects/runner/provisions/builds'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/ccaum/projects/puppet-site/site/profile/lib/puppet/functions'

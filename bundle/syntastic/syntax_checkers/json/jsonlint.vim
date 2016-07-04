@@ -9,13 +9,16 @@
 "             See http://sam.zoy.org/wtfpl/COPYING for more details.
 "============================================================================
 
-if exists("g:loaded_syntastic_json_jsonlint_checker")
+if exists('g:loaded_syntastic_json_jsonlint_checker')
     finish
 endif
-let g:loaded_syntastic_json_jsonlint_checker=1
+let g:loaded_syntastic_json_jsonlint_checker = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 function! SyntaxCheckers_json_jsonlint_GetLocList() dict
-    let makeprg = self.makeprgBuild({ 'post_args': '--compact' })
+    let makeprg = self.makeprgBuild({ 'post_args_after': '--compact' })
 
     let errorformat =
         \ '%ELine %l:%c,'.
@@ -33,3 +36,8 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'json',
     \ 'name': 'jsonlint'})
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+" vim: set sw=4 sts=4 et fdm=marker:

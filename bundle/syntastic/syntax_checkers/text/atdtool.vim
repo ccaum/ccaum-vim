@@ -10,16 +10,23 @@
 "
 "============================================================================
 
-if exists("g:loaded_syntastic_text_atdtool_checker")
+if exists('g:loaded_syntastic_text_atdtool_checker')
     finish
 endif
 let g:loaded_syntastic_text_atdtool_checker = 1
 
+if !exists('g:syntastic_text_atdtool_sort')
+    let g:syntastic_text_atdtool_sort = 1
+endif
+
+let s:save_cpo = &cpo
+set cpo&vim
+
 function! SyntaxCheckers_text_atdtool_GetHighlightRegex(item)
     let term = matchstr(a:item['text'], '\m "\zs[^"]\+\ze"\($\| | suggestions:\)')
-    if term != ''
+    if term !=# ''
         let col = get(a:item, 'col', 0)
-        let term = (col != 0 ? '\%' . col . 'c' : '') . '\V' . term
+        let term = (col != 0 ? '\%' . col . 'c' : '') . '\V' . escape(term, '\')
     endif
     return term
 endfunction
@@ -47,3 +54,8 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'text',
     \ 'name': 'atdtool'})
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+" vim: set sw=4 sts=4 et fdm=marker:

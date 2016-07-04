@@ -10,13 +10,16 @@
 "
 "============================================================================
 
-if exists("g:loaded_syntastic_cucumber_cucumber_checker")
+if exists('g:loaded_syntastic_cucumber_cucumber_checker')
     finish
 endif
-let g:loaded_syntastic_cucumber_cucumber_checker=1
+let g:loaded_syntastic_cucumber_cucumber_checker = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 function! SyntaxCheckers_cucumber_cucumber_GetLocList() dict
-    let makeprg = self.makeprgBuild({ 'args': '--dry-run --quiet --strict --format pretty' })
+    let makeprg = self.makeprgBuild({ 'args_after': '--dry-run --quiet --strict --format pretty' })
 
     let errorformat =
         \ '%f:%l:%c:%m,' .
@@ -32,3 +35,8 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'cucumber',
     \ 'name': 'cucumber'})
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+" vim: set sw=4 sts=4 et fdm=marker:
